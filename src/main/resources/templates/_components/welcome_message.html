@@ -1,0 +1,15 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <div th:switch="${#httpServletRequest.requestURL}" class="alert alert-success" role="alert">
+        <span th:case="'/'">welcome</span>
+        <span th:case="'/'">welcome Menu 1</span>
+        <span th:case="'/'" >welcome Menu 2</span>
+      </div>
+    </div>
+  </div>
+</div>
