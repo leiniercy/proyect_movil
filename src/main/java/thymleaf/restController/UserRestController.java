@@ -1,4 +1,4 @@
-package thymleaf.movil.controller;
+package thymleaf.restController;
 
 import java.util.List;
 
@@ -22,9 +22,9 @@ import thymleaf.movil.repository.UserRepository;
 
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/user")
 @CrossOrigin
-public class UserController {
+public class UserRestController {
     
     @Autowired
     UserRepository userRepository;

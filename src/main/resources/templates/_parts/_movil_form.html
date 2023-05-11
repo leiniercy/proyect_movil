@@ -1,0 +1,406 @@
+<html
+  xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+>
+  <!-- 
+                  th:action="@{/api/movil}" indica hacia donde va a enviar 
+                  th:method="post" indica el metodo que se va a utilizar (backend)
+                  th:method="post" indica el objeto con el que se esta trabajando
+                  th:value="*{nombre}" se utiliza para recibir el valor en el update 
+                  th:field="*{nombre}" se utiliza para enviar el valor en el create
+    -->
+  <div class="container">
+    <div class="row">
+      <!-- vista cuando llame a todos los elementos -->
+      <div class="col-12">
+        <!-- con el metodo post busca quien tiene el metodo movil -->
+        <form th:object="${movil}" th:action="@{/movil}" th:method="post" >
+          <div class="">
+            <h5><label>Características principales</label></h5>
+          </div>
+          <div class="form-group">
+            <input
+              type="hidden"
+              th:field="*{nombre}"
+              class="form-control"
+              id="id"
+              name="id"
+            />
+          </div>
+          <div class="form-group">
+            <label for="nombre">Nombre:</label>
+            <input
+              type="text"
+              th:value="*{nombre}"
+              th:field="*{nombre}"
+              class="form-control"
+              id="nombre"
+              name="nombre"
+            />
+            <small id="screenHelpInline" class="text-muted">
+              Debe tener de 2-500 caracteres.
+            </small>
+            <!--Este div solo se va a mostrar si existe algun error-->
+            <div
+              class="alert-danger"
+              th:if="${#fields.hasErrors('nombre')}"
+              th:errors="*{nombre}"
+            >
+              Name Error
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="pantalla">Pantalla:</label>
+            <input
+              th:value="*{pantalla}"
+              th:field="*{pantalla}"
+              type="text"
+              class="form-control"
+              id="pantalla"
+              name="pantalla"
+            />
+            <small id="screenHelpInline" class="text-muted">
+              Debe tener de 2-500 caracteres.
+            </small>
+            <!--Este div solo se va a mostrar si existe algun error-->
+            <div
+              class="alert-danger"
+              th:if="${#fields.hasErrors('pantalla')}"
+              th:errors="*{pantalla}"
+            >
+              Name Error
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="procesador">Procesador:</label>
+            <input
+              th:value="*{procesador}"
+              th:field="*{procesador}"
+              type="text"
+              class="form-control"
+              id="procesador"
+              name="procesador"
+            />
+            <small id="screenHelpInline" class="text-muted">
+              Debe tener de 2-500 caracteres.
+            </small>
+            <!--Este div solo se va a mostrar si existe algun error-->
+            <div
+              class="alert-danger"
+              th:if="${#fields.hasErrors('procesador')}"
+              th:errors="*{procesador}"
+            >
+              Name Error
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="modelo">Modelo:</label>
+            <input
+              th:value="*{modelo}"
+              th:field="*{modelo}"
+              type="text"
+              class="form-control"
+              id="modelo"
+              name="modelo"
+            />
+            <small id="screenHelpInline" class="text-muted">
+              Debe tener de 2-500 caracteres.
+            </small>
+            <!--Este div solo se va a mostrar si existe algun error-->
+            <div
+              class="alert-danger"
+              th:if="${#fields.hasErrors('modelo')}"
+              th:errors="*{modelo}"
+            >
+              Name Error
+            </div>
+          </div>
+          <div class="">
+            <h5><label>Almacenamiento</label></h5>
+          </div>
+          <div class="form-group">
+            <label for="ram">RAM:</label>
+            <input
+              th:value="*{ram}"
+              th:field="*{ram}"
+              type="number"
+              class="form-control"
+              id="ram"
+              name="ram"
+            />
+            <!--Este div solo se va a mostrar si existe algun error-->
+            <div
+              class="alert-danger"
+              th:if="${#fields.hasErrors('ram')}"
+              th:errors="*{ram}"
+            >
+              Name Error
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="rom">ROM:</label>
+            <input
+              th:value="*{rom}"
+              th:field="*{rom}"
+              type="number"
+              class="form-control"
+              id="rom"
+              name="rom"
+            />
+            <!--Este div solo se va a mostrar si existe algun error-->
+            <div
+              class="alert-danger"
+              th:if="${#fields.hasErrors('rom')}"
+              th:errors="*{rom}"
+            >
+              Name Error
+            </div>
+          </div>
+          <div class="">
+            <h5><label>Camaras</label></h5>
+          </div>
+          <div class="form-group">
+            <label for="camaraTrasera">Cámara trasera:</label>
+            <input
+              th:value="*{camaraTrasera}"
+              th:field="*{camaraTrasera}"
+              type="number"
+              class="form-control"
+              id="camaraTrasera"
+              name="camaraTrasera"
+            />
+            <small id="screenHelpInline" class="text-muted">
+              Debe tener de 2-500 caracteres.
+            </small>
+            <!--Este div solo se va a mostrar si existe algun error-->
+            <div
+              class="alert-danger"
+              th:if="${#fields.hasErrors('camaraTrasera')}"
+              th:errors="*{camaraTrasera}"
+            >
+              Name Error
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="camaraFrontal">Cámara frontal:</label>
+            <input
+              th:value="*{camaraFrontal}"
+              th:field="*{camaraFrontal}"
+              type="number"
+              class="form-control"
+              id="camaraFrontal"
+              name="camaraFrontal"
+            />
+            <small id="screenHelpInline" class="text-muted">
+              Debe tener de 2-500 caracteres.
+            </small>
+            <!--Este div solo se va a mostrar si existe algun error-->
+            <div
+              class="alert-danger"
+              th:if="${#fields.hasErrors('camaraFrontal')}"
+              th:errors="*{camaraFrontal}"
+            >
+              Name Error
+            </div>
+          </div>
+          <div class="">
+            <h5><label>Conectividad</label></h5>
+          </div>
+          <div class="form-group">
+            <label for="banda_2G_GSM">Banda 2G GSM:</label>
+            <input
+              th:value="*{banda2G}"
+              th:field="*{banda2G}"
+              type="text"
+              class="form-control"
+              id="banda_2G_GSM"
+              name="banda_2G_GSM"
+            />
+            <small id="screenHelpInline" class="text-muted">
+              Debe tener de 2-500 caracteres.
+            </small>
+            <!--Este div solo se va a mostrar si existe algun error-->
+            <div
+              class="alert-danger"
+              th:if="${#fields.hasErrors('banda2G')}"
+              th:errors="*{banda2G}"
+            >
+              Name Error
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="banda_3G_LATAM_UMTS">Banda 3G LATAM UMTS:</label>
+            <input
+              th:value="*{banda3G}"
+              th:field="*{banda3G}"
+              type="text"
+              class="form-control"
+              id="banda_3G_LATAM_UMTS"
+              name="banda_3G_LATAM_UMTS"
+            />
+            <small id="screenHelpInline" class="text-muted">
+              Debe tener de 2-500 caracteres.
+            </small>
+            <!--Este div solo se va a mostrar si existe algun error-->
+            <div
+              class="alert-danger"
+              th:if="${#fields.hasErrors('banda3G')}"
+              th:errors="*{banda3G}"
+            >
+              Name Error
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="banda_4G_LTE_LATAM">Banda 4G LTE LATAM:</label>
+            <input
+              th:value="*{banda4G}"
+              th:field="*{banda4G}"
+              type="text"
+              class="form-control"
+              id="banda_4G_LTE_LATAM"
+              name="banda_4G_LTE_LATAM"
+            />
+            <small id="screenHelpInline" class="text-muted">
+              Debe tener de 2-500 caracteres.
+            </small>
+            <!--Este div solo se va a mostrar si existe algun error-->
+            <div
+              class="alert-danger"
+              th:if="${#fields.hasErrors('banda4G')}"
+              th:errors="*{banda4G}"
+            >
+              Name Error
+            </div>
+          </div>
+          <div class="">
+            <h5><label>Batería</label></h5>
+          </div>
+          <div class="form-group">
+            <label for="bateria">Capacidad:</label>
+            <input
+              th:value="*{bateria}"
+              th:field="*{bateria}"
+              type="number"
+              class="form-control"
+              id="bateria"
+              name="bateria"
+            />
+            <!--Este div solo se va a mostrar si existe algun error-->
+            <div
+              class="alert-danger"
+              th:if="${#fields.hasErrors('bateria')}"
+              th:errors="*{bateria}"
+            >
+              Name Error
+            </div>
+          </div>
+
+          <div class="">
+            <h5><label>Otros</label></h5>
+          </div>
+
+          <div class="form-group">
+            <label for="wifi">WiFi:</label>
+            <input
+              th:value="*{wifi}"
+              th:field="*{wifi}"
+              type="text"
+              class="form-control"
+              id="wifi"
+              name="wifi"
+            />
+            <small id="screenHelpInline" class="text-muted">
+              Debe tener de 2-500 caracteres.
+            </small>
+            <!--Este div solo se va a mostrar si existe algun error-->
+            <div
+              class="alert-danger"
+              th:if="${#fields.hasErrors('wifi')}"
+              th:errors="*{wifi}"
+            >
+              Name Error
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="sim">SIM:</label>
+            <input
+              th:value="*{sim}"
+              th:field="*{sim}"
+              type="text"
+              class="form-control"
+              id="sim"
+              name="sim"
+            />
+            <small id="screenHelpInline" class="text-muted">
+              Debe tener de 2-500 caracteres.
+            </small>
+            <!--Este div solo se va a mostrar si existe algun error-->
+            <div
+              class="alert-danger"
+              th:if="${#fields.hasErrors('sim')}"
+              th:errors="*{sim}"
+            >
+              Name Error
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="sensores">Sensores:</label>
+            <input
+              th:value="*{sensores}"
+              th:field="*{sensores}"
+              type="text"
+              class="form-control"
+              id="sensores"
+              name="sensores"
+            />
+            <small id="screenHelpInline" class="text-muted">
+              Debe tener de 2-500 caracteres.
+            </small>
+            <!--Este div solo se va a mostrar si existe algun error-->
+            <div
+              class="alert-danger"
+              th:if="${#fields.hasErrors('sensores')}"
+              th:errors="*{sensores}"
+            >
+              Name Error
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="precio">Precio:</label>
+            <input
+              th:value="*{precio}"
+              th:field="*{precio}"
+              type="number"
+              class="form-control"
+              id="precio"
+              name="precio"
+            />
+            <!--Este div solo se va a mostrar si existe algun error-->
+            <div
+              class="alert-danger"
+              th:if="${#fields.hasErrors('precio')}"
+              th:errors="*{precio}"
+            >
+              Name Error
+            </div>
+          </div>
+          <div class="form-group" style="margin-top: 10px">
+            <button type="submit" class="btn btn-primary">Aceptar</button>
+            <button type="reset" class="btn btn-primary">Cancelar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</html>

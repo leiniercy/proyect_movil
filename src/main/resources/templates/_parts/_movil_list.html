@@ -1,0 +1,21 @@
+<html
+  xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+>
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Nombre</th>
+        <th scope="col">Pantalla</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr th:each="movil: ${movilList}"> <!--${movilList} hace referencia a la peticion del controlador-->
+        <td th:text="${movil.id}">id</td><!--movil.getId()-->
+        <td th:text="${movil.nombre}">nombre</td> <!--movil.getNombre()-->
+        <td th:text="${movil.pantalla}">pantalla</td> <!--movil.getPantalla()-->
+      </tr>
+    </tbody>
+  </table>
