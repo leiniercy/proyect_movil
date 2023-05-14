@@ -1,8 +1,7 @@
-<html
-  xmlns="http://www.w3.org/1999/xhtml"
-  xmlns:th="http://www.thymeleaf.org"
-  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
->
+<html xmlns="http://www.w3.org/1999/xhtml" 
+    xmlns:th="http://www.thymeleaf.org" 
+    xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
   <!-- 
                   th:action="@{/api/movil}" indica hacia donde va a enviar 
                   th:method="post" indica el metodo que se va a utilizar (backend)
@@ -15,14 +14,14 @@
       <!-- vista cuando llame a todos los elementos -->
       <div class="col-12">
         <!-- con el metodo post busca quien tiene el metodo movil -->
-        <form th:object="${movil}" th:action="@{/movil}" th:method="post" >
+        <form th:object="${movil}" th:action="@{/movil}" th:method="post">
           <div class="">
             <h5><label>Características principales</label></h5>
           </div>
           <div class="form-group">
             <input
               type="hidden"
-              th:field="*{nombre}"
+              th:field="*{id}"
               class="form-control"
               id="id"
               name="id"
@@ -43,7 +42,7 @@
             </small>
             <!--Este div solo se va a mostrar si existe algun error-->
             <div
-              class="alert-danger"
+              class="alert alert-danger"
               th:if="${#fields.hasErrors('nombre')}"
               th:errors="*{nombre}"
             >
@@ -66,7 +65,7 @@
             </small>
             <!--Este div solo se va a mostrar si existe algun error-->
             <div
-              class="alert-danger"
+              class="alert alert-danger"
               th:if="${#fields.hasErrors('pantalla')}"
               th:errors="*{pantalla}"
             >
@@ -89,7 +88,7 @@
             </small>
             <!--Este div solo se va a mostrar si existe algun error-->
             <div
-              class="alert-danger"
+              class="alert alert-danger"
               th:if="${#fields.hasErrors('procesador')}"
               th:errors="*{procesador}"
             >
@@ -112,7 +111,7 @@
             </small>
             <!--Este div solo se va a mostrar si existe algun error-->
             <div
-              class="alert-danger"
+              class="alert alert-danger"
               th:if="${#fields.hasErrors('modelo')}"
               th:errors="*{modelo}"
             >
@@ -134,7 +133,7 @@
             />
             <!--Este div solo se va a mostrar si existe algun error-->
             <div
-              class="alert-danger"
+              class="alert alert-danger"
               th:if="${#fields.hasErrors('ram')}"
               th:errors="*{ram}"
             >
@@ -154,7 +153,7 @@
             />
             <!--Este div solo se va a mostrar si existe algun error-->
             <div
-              class="alert-danger"
+              class="alert alert-danger"
               th:if="${#fields.hasErrors('rom')}"
               th:errors="*{rom}"
             >
@@ -179,7 +178,7 @@
             </small>
             <!--Este div solo se va a mostrar si existe algun error-->
             <div
-              class="alert-danger"
+              class="alert alert-danger"
               th:if="${#fields.hasErrors('camaraTrasera')}"
               th:errors="*{camaraTrasera}"
             >
@@ -202,7 +201,7 @@
             </small>
             <!--Este div solo se va a mostrar si existe algun error-->
             <div
-              class="alert-danger"
+              class="alert alert-danger"
               th:if="${#fields.hasErrors('camaraFrontal')}"
               th:errors="*{camaraFrontal}"
             >
@@ -227,7 +226,7 @@
             </small>
             <!--Este div solo se va a mostrar si existe algun error-->
             <div
-              class="alert-danger"
+              class="alert alert-danger"
               th:if="${#fields.hasErrors('banda2G')}"
               th:errors="*{banda2G}"
             >
@@ -250,7 +249,7 @@
             </small>
             <!--Este div solo se va a mostrar si existe algun error-->
             <div
-              class="alert-danger"
+              class="alert alert-danger"
               th:if="${#fields.hasErrors('banda3G')}"
               th:errors="*{banda3G}"
             >
@@ -273,7 +272,7 @@
             </small>
             <!--Este div solo se va a mostrar si existe algun error-->
             <div
-              class="alert-danger"
+              class="alert alert-danger"
               th:if="${#fields.hasErrors('banda4G')}"
               th:errors="*{banda4G}"
             >
@@ -295,7 +294,7 @@
             />
             <!--Este div solo se va a mostrar si existe algun error-->
             <div
-              class="alert-danger"
+              class="alert alert-danger"
               th:if="${#fields.hasErrors('bateria')}"
               th:errors="*{bateria}"
             >
@@ -322,7 +321,7 @@
             </small>
             <!--Este div solo se va a mostrar si existe algun error-->
             <div
-              class="alert-danger"
+              class="alert alert-danger"
               th:if="${#fields.hasErrors('wifi')}"
               th:errors="*{wifi}"
             >
@@ -345,7 +344,7 @@
             </small>
             <!--Este div solo se va a mostrar si existe algun error-->
             <div
-              class="alert-danger"
+              class="alert alert-danger"
               th:if="${#fields.hasErrors('sim')}"
               th:errors="*{sim}"
             >
@@ -368,7 +367,7 @@
             </small>
             <!--Este div solo se va a mostrar si existe algun error-->
             <div
-              class="alert-danger"
+              class="alert alert-danger"
               th:if="${#fields.hasErrors('sensores')}"
               th:errors="*{sensores}"
             >
@@ -388,7 +387,7 @@
             />
             <!--Este div solo se va a mostrar si existe algun error-->
             <div
-              class="alert-danger"
+              class="alert alert-danger"
               th:if="${#fields.hasErrors('precio')}"
               th:errors="*{precio}"
             >
@@ -398,6 +397,14 @@
           <div class="form-group" style="margin-top: 10px">
             <button type="submit" class="btn btn-primary">Aceptar</button>
             <button type="reset" class="btn btn-primary">Cancelar</button>
+          </div>
+          <!--Este div solo se va a mostrar si existe algun error-->
+          <div
+            class="alert alert-danger text-center"
+            th:if="${formErrorMessage}"
+            th:text="${formErrorMessage}"
+          >
+            Error Message
           </div>
         </form>
       </div>

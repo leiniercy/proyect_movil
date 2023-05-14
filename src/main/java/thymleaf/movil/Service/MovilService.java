@@ -51,7 +51,7 @@ public class MovilService {
      * @param id no debe ser vacio {@literal null}.
 	 * @return una referencia a la entidad que coincida con el identificador.
      **/
-    public Movil findById(Integer id) {
+    public Movil findById(Long id) {
         return repository.findById(id).get();
     }
 
@@ -75,7 +75,7 @@ public class MovilService {
 	 * METODO PARA ELIMINAR UN OBJETO POR SU IDENTIFICADOR
      * @param Identificador
 	 **/
-    public void deleteById(Integer id) {
+    public void deleteById(Long id) {
         repository.deleteById(id);
     }
 
@@ -89,7 +89,7 @@ public class MovilService {
 
     // METODO QUE DEVUELVE LA CANTIDAD DE OBJETOS QUE EXISTE
     public long count() {
-        return repository.findAll().size();
+        return (long) repository.count();
     }
 
 }

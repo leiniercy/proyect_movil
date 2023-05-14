@@ -36,28 +36,45 @@ public class MovilController {
     @Autowired // utilizamos el patron singelton para crear un pto de acceso global
     MovilService movilService;
 
-    private static final String VIEW = "/layout.html";
+    private static final String VIEW = "layout";
     private static final String REDIRECT = "redirect:/movil";
+    private Long id=(long) -1; 
 
-    @RequestMapping(method = RequestMethod.GET, name = "getPageMovil", path = "/movil")
+    //@RequestMapping(method = RequestMethod.GET, name = "getPageMovil", path = "/movil")
+    @GetMapping(path = "/movil")
     public String getPageMovil(
             Model model) {     
-                // model.addAttribute("movil", new Movil());
-                model.addAttribute("movilList", movilService.findAll());
-        return "layout";
+                 model.addAttribute("movil", new Movil());
+               // model.addAttribute("movilList", movilService.findAll());
+        return VIEW;
     }
 
     /** @ModelAttribute Movil movil concide con el valor del th:object del formulario**/ 
-    // @PostMapping(value = "path")
-    // public String newAndUpdate(
-    //     @Valid @ModelAttribute("movil") Movil movil, 
-    //     BindingResult result,
-    //     ModelMap modelMap) {
-    //         if(result.hasErrors()){
-    //             modelMap.addAttribute("movil", movil);
-    //         }
-    //     // movilService.save(movil);
-    //     return "layout/_movil_form";
-    // }
+    //@RequestMapping(method = RequestMethod.POST, name = "postMovil", path = "/movil")
+    @PostMapping(path = "/movil")
+    public String newAndUpdate(
+        @Valid @ModelAttribute("movil") Movil movil, 
+        BindingResult result,
+        ModelMap model) {
+            if(result.hasErrors()){
+                model.addAttribute("movil", movil);
+            }else{
+                try {
+                    if(this.id == -1){
+                    movil.setId(id);
+                    movilService.save(movil);
+                    model.addAttribute("movil", new Movil());
+                    }
+                    
+                } catch (Exception e) {
+                    // le pasamos al HTML la excepcion encontrada al guradar un objeto de tipo movil 
+                    model.addAttribute("formErrorMessage",e.getMessage());
+                    model.addAttribute("movil", movil);
+                    // model.addAttribute("movilList", movilService.findAll());
+                }
+            }
+ 
+        return VIEW;
+    }
 
 }
