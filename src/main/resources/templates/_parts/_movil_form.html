@@ -1,7 +1,9 @@
-<html xmlns="http://www.w3.org/1999/xhtml" 
-    xmlns:th="http://www.thymeleaf.org" 
-    xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
-    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<html
+  xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+>
   <!-- 
                   th:action="@{/api/movil}" indica hacia donde va a enviar 
                   th:method="post" indica el metodo que se va a utilizar (backend)
@@ -14,19 +16,21 @@
       <!-- vista cuando llame a todos los elementos -->
       <div class="col-12">
         <!-- con el metodo post busca quien tiene el metodo movil -->
-        <form th:object="${movil}" th:action="@{/movil}" th:method="post">
+        <form
+          th:object="${movil}"
+          th:action="${editMode} ?@{/movil/edit} :@{/movil}"
+          th:method="post"
+        >
           <div class="">
             <h5><label>Características principales</label></h5>
           </div>
-          <div class="form-group">
-            <input
-              type="hidden"
-              th:field="*{id}"
-              class="form-control"
-              id="id"
-              name="id"
-            />
-          </div>
+          <!--Es necesario para poder pasar la validacion del Model-->
+          <input
+            class="form-control"
+            type="hidden"
+            th:field="${movil.id}"
+            th:if="${editMode}"
+          />
           <div class="form-group">
             <label for="nombre">Nombre:</label>
             <input
@@ -395,7 +399,12 @@
             </div>
           </div>
           <div class="form-group" style="margin-top: 10px">
-            <button type="submit" class="btn btn-primary">Aceptar</button>
+            <input
+              type="submit"
+              class="btn btn-primary"
+              value="GuardarCambios"
+              th:value="${editMode}?'Actualizar':'Añadir'"
+            />
             <button type="reset" class="btn btn-primary">Cancelar</button>
           </div>
           <!--Este div solo se va a mostrar si existe algun error-->

@@ -25,6 +25,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 /**
  *
@@ -38,43 +40,87 @@ public class MovilController {
 
     private static final String VIEW = "layout";
     private static final String REDIRECT = "redirect:/movil";
-    private Long id=(long) -1; 
+    private Long id = (long) -1;
 
-    //@RequestMapping(method = RequestMethod.GET, name = "getPageMovil", path = "/movil")
     @GetMapping(path = "/movil")
     public String getPageMovil(
-            Model model) {     
-                 model.addAttribute("movil", new Movil());
-               // model.addAttribute("movilList", movilService.findAll());
+            Model model) {
+        model.addAttribute("movil", new Movil());
+        model.addAttribute("movilList", movilService.findAll());
         return VIEW;
     }
 
-    /** @ModelAttribute Movil movil concide con el valor del th:object del formulario**/ 
-    //@RequestMapping(method = RequestMethod.POST, name = "postMovil", path = "/movil")
+    /**
+     *  @Valid se encarga de verificar las validadciones de los campos de la entidad
+     *  @ModelAttribute Movil movil concide con el valor del th:object del formulario
+     **/
+
     @PostMapping(path = "/movil")
     public String newAndUpdate(
-        @Valid @ModelAttribute("movil") Movil movil, 
-        BindingResult result,
-        ModelMap model) {
-            if(result.hasErrors()){
-                model.addAttribute("movil", movil);
-            }else{
-                try {
-                    if(this.id == -1){
+            @Valid @ModelAttribute("movil") Movil movil,
+            BindingResult result,
+            ModelMap model) {
+        if (result.hasErrors()) {
+            model.addAttribute("movil", movil);
+        } else {
+            try {
+                if (this.id == -1) {
                     movil.setId(id);
                     movilService.save(movil);
                     model.addAttribute("movil", new Movil());
-                    }
-                    
-                } catch (Exception e) {
-                    // le pasamos al HTML la excepcion encontrada al guradar un objeto de tipo movil 
-                    model.addAttribute("formErrorMessage",e.getMessage());
-                    model.addAttribute("movil", movil);
-                    // model.addAttribute("movilList", movilService.findAll());
+                    model.addAttribute("movilList", movilService.findAll());
                 }
+
+            } catch (Exception e) {
+                // le pasamos al HTML la excepcion encontrada al guradar un objeto de tipo movil
+                model.addAttribute("formErrorMessage", e.getMessage());
+                model.addAttribute("movil", movil);
+                model.addAttribute("movilList", movilService.findAll());
             }
- 
+        }
+
         return VIEW;
     }
+
+    @GetMapping(value = "/movil/edit/{id}")
+    public String update(
+            @PathVariable(name = "id") Long id,
+            Model model) throws Exception {
+        Movil oldMovil = movilService.findById(id);
+        model.addAttribute("movilList", movilService.findAll());
+        model.addAttribute("movil", oldMovil);
+        model.addAttribute("editMode", "true");
+        
+        return VIEW;
+    }
+
+    @PostMapping("/movil/edit")
+	public String postEditMovilForm(@Valid @ModelAttribute("movil")Movil movil, BindingResult result, Model model) {
+		//Si tiene errores
+        if (result.hasErrors()) {
+            model.addAttribute("movil", movil);
+            model.addAttribute("editMode", "true");
+        } else {
+            try {
+                    movilService.update(movil);
+                    model.addAttribute("movil", new Movil());
+                    model.addAttribute("movilList", movilService.findAll());
+             } catch (Exception e) {
+                // le pasamos al HTML la excepcion encontrada al guradar un objeto de tipo movil
+                model.addAttribute("formErrorMessage", e.getMessage());
+                model.addAttribute("movil", movil);
+                model.addAttribute("movilList", movilService.findAll());
+                model.addAttribute("editMode", "true");
+            }
+        }
+
+        return VIEW;
+		
+	}
+	
+	@GetMapping("/movil/cancel")
+	public String cancelEditUser(ModelMap model) {
+		return REDIRECT;
+	}
 
 }

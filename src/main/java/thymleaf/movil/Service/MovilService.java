@@ -46,13 +46,28 @@ public class MovilService {
         return movil;
     }
 
+     /**
+     * Map todo 
+     * @param from
+     * @return to
+     **/
+    public Movil update(Movil fromMovil) throws Exception {
+        Movil toMovil = findById(fromMovil.getId());
+        //Mapeo del objeto para garantizar que se actualicen todos los cambios
+        toMovil.setNombre(fromMovil.getNombre());
+
+
+        return repository.save(toMovil);
+    }
+
     /**
      * METODO PARA VERIFICAR SI EL MOVIL EXISTE, PREGUNTANDO POR EL ID
      * @param id no debe ser vacio {@literal null}.
 	 * @return una referencia a la entidad que coincida con el identificador.
      **/
-    public Movil findById(Long id) {
-        return repository.findById(id).get();
+    public Movil findById(Long id) throws Exception{
+       Movil movil =repository.findById(id).orElseThrow(() -> new Exception("Objeto no encontrado."));
+        return movil;
     }
 
     /**
