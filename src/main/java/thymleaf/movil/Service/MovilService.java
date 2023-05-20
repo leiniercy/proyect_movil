@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import thymleaf.movil.entity.Movil;
+import thymleaf.movil.exeptions.MovilNameOrIdNotFound;
 import thymleaf.movil.repository.MovilRepository;
 
 /**
@@ -26,10 +27,10 @@ public class MovilService {
      * @param entity indica el objeto que se desea guradar. No debe ser vacio {@literal null}.
      * @return true/false
      **/
-    private boolean checkMovilAvailable(Movil movil) throws Exception {
+    private boolean checkMovilAvailable(Movil movil) throws MovilNameOrIdNotFound {
         Optional<Movil> movilFound = repository.findById(movil.getId());
         if (movilFound.isPresent()) {
-            throw new Exception("Móvil no disponible");
+            throw new MovilNameOrIdNotFound("Móvil no disponible");
         }
         return true;
     }
@@ -39,7 +40,7 @@ public class MovilService {
      * @param entity indica el objeto que se desea guradar. No debe ser vacio {@literal null}.
      * @return el objeto guardado
      **/
-    public Movil save(Movil movil) throws Exception {
+    public Movil save(Movil movil) throws MovilNameOrIdNotFound {
         if (checkMovilAvailable(movil)) {
             movil = repository.save(movil);
         }
@@ -51,7 +52,7 @@ public class MovilService {
      * @param from
      * @return to
      **/
-    public Movil update(Movil fromMovil) throws Exception {
+    public Movil update(Movil fromMovil) throws MovilNameOrIdNotFound {
         Movil toMovil = findById(fromMovil.getId());
         //Mapeo del objeto para garantizar que se actualicen todos los cambios
         toMovil.setNombre(fromMovil.getNombre());
@@ -65,8 +66,8 @@ public class MovilService {
      * @param id no debe ser vacio {@literal null}.
 	 * @return una referencia a la entidad que coincida con el identificador.
      **/
-    public Movil findById(Long id) throws Exception{
-       Movil movil =repository.findById(id).orElseThrow(() -> new Exception("Objeto no encontrado."));
+    public Movil findById(Long id) throws MovilNameOrIdNotFound{
+       Movil movil =repository.findById(id).orElseThrow(() -> new MovilNameOrIdNotFound("El id de este movil no existe."));
         return movil;
     }
 
@@ -90,7 +91,7 @@ public class MovilService {
 	 * METODO PARA ELIMINAR UN OBJETO POR SU IDENTIFICADOR
      * @param Identificador
 	 **/
-    public void deleteById(Long id) throws Exception{
+    public void deleteById(Long id) throws MovilNameOrIdNotFound{
        Movil movil = findById(id);
        repository.delete(movil);
     }

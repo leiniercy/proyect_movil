@@ -19,6 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import thymleaf.movil.Service.MovilService;
 import thymleaf.movil.entity.Movil;
+import thymleaf.movil.exeptions.MovilNameOrIdNotFound;
 import thymleaf.movil.repository.MovilRepository;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -88,7 +89,7 @@ public class MovilController {
     @GetMapping(value = "/movil/edit/{id}")
     public String update(
             @PathVariable(name = "id") Long id,
-            Model model) throws Exception {
+            Model model) throws MovilNameOrIdNotFound {
         Movil oldMovil = movilService.findById(id);
         model.addAttribute("movilList", movilService.findAll());
         model.addAttribute("movil", oldMovil);
@@ -108,7 +109,7 @@ public class MovilController {
                     movilService.update(movil);
                     model.addAttribute("movil", new Movil());
                     model.addAttribute("movilList", movilService.findAll());
-             } catch (Exception e) {
+             } catch (MovilNameOrIdNotFound e) {
                 // le pasamos al HTML la excepcion encontrada al guradar un objeto de tipo movil
                 model.addAttribute("formErrorMessage", e.getMessage());
                 model.addAttribute("movil", movil);
@@ -130,7 +131,7 @@ public class MovilController {
 	public String deleteMovil(Model model, @PathVariable(name="id") Long id) {
 		try {
 			movilService.deleteById(id);
-		} catch (Exception e) {
+		} catch (MovilNameOrIdNotFound e) {
 			model.addAttribute("deleteError","El objeto no puede ser eliminado.");
 		}
 		return getPageMovil(model);
