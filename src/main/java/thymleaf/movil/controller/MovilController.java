@@ -82,6 +82,9 @@ public class MovilController {
         return VIEW;
     }
 
+    /**
+     *   @PathVariable(name = "id") Long id se encarga de llamar al id desde la vista
+     **/
     @GetMapping(value = "/movil/edit/{id}")
     public String update(
             @PathVariable(name = "id") Long id,
@@ -122,5 +125,16 @@ public class MovilController {
 	public String cancelEditUser(ModelMap model) {
 		return REDIRECT;
 	}
+
+    @GetMapping("/movil/delete/{id}")
+	public String deleteMovil(Model model, @PathVariable(name="id") Long id) {
+		try {
+			movilService.deleteById(id);
+		} catch (Exception e) {
+			model.addAttribute("deleteError","El objeto no puede ser eliminado.");
+		}
+		return getPageMovil(model);
+	}
+
 
 }

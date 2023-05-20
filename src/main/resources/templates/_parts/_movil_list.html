@@ -3,19 +3,55 @@
   xmlns:th="http://www.thymeleaf.org"
   xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
 >
-<table class="table">
+  <table class="table">
     <thead>
       <tr>
         <th scope="col">#</th>
         <th scope="col">Nombre</th>
         <th scope="col">Pantalla</th>
+        <th></th>
       </tr>
     </thead>
     <tbody>
-      <tr th:each="movil: ${movilList}"> <!--${movilList} hace referencia a la peticion del controlador-->
-        <td th:text="${movil.id}">id</td><!--movil.getId()-->
-        <td th:text="${movil.nombre}">nombre</td> <!--movil.getNombre()-->
-        <td th:text="${movil.pantalla}">pantalla</td> <!--movil.getPantalla()-->
+      <tr th:each="movil: ${movilList}">
+        <!--${movilList} hace referencia a la peticion del controlador-->
+        <td th:text="${movil.id}">id</td>
+        <!--movil.getId()-->
+        <td th:text="${movil.nombre}">nombre</td>
+        <!--movil.getNombre()-->
+        <td th:text="${movil.pantalla}">pantalla</td>
+        <!--movil.getPantalla()-->
+        <td>
+          <!-- <span th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')} or (${#authorization.expression('hasRole(''ROLE_USER'')')} and ${#httpServletRequest.remoteUser==user.username})">
+					    <a href="#" th:href="@{'/editUser/'+ ${user.id}}"><i class="fas fa-edit"></i></a>
+					</span> -->
+          <!-- <span th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}" >
+						| <a href="#" th:onclick="'javascript:confirmDelete(\''+ ${user.id} +'\');'"><i class="fas fa-user-times"></i></a>
+					</span> -->
+          <a href="#" th:href="@{'/movil/edit/'+ ${movil.id}}"><i class="fas fa-edit"></i></a>
+          <a href="#" th:onclick="'javascript:confirmDelete(\''+ ${movil.id} +'\');'"><i class="fas fa-user-times"></i></a>
+        </td>
       </tr>
     </tbody>
   </table>
+  <!--Este div solo se va a mostrar si existe algun error-->
+  <div
+    class="alert alert-danger text-center"
+    th:if="${deleteError}"
+    th:text="${deleteError}"
+  >
+    Error Message
+  </div>
+</html>
+
+<script type="text/javascript">
+  function confirmDelete(id) {
+    $("#deleteModal").modal("show");
+    $("#movilIdHiddenInput").val(id);
+  }
+
+  function deleteMovil() {
+    var id = $("#movilIdHiddenInput").val();
+    window.location = "/movil/delete/" + id;
+  }
+</script>

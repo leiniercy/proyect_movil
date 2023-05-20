@@ -90,8 +90,9 @@ public class MovilService {
 	 * METODO PARA ELIMINAR UN OBJETO POR SU IDENTIFICADOR
      * @param Identificador
 	 **/
-    public void deleteById(Long id) {
-        repository.deleteById(id);
+    public void deleteById(Long id) throws Exception{
+       Movil movil = findById(id);
+       repository.delete(movil);
     }
 
     /**

@@ -25,5 +25,7 @@
     <div th:include="_parts/_footer"></div>
     <!--Scripts-->
     <div th:replace="_components/java_script"></div>
+    <!--Modal-->
+    <div th:include="_parts/_confirm_delete_dialog.html" th:remove="tag"></div>
 </body>
 </html>
