@@ -405,7 +405,8 @@
               value="GuardarCambios"
               th:value="${editMode}?'Actualizar':'Añadir'"
             />
-            <button type="reset" class="btn btn-primary">Cancelar</button>
+            <a class="btn btn-secondary" th:href="@{/movil/cancel}">Cancelar</a>
+            
           </div>
           <!--Este div solo se va a mostrar si existe algun error-->
           <div

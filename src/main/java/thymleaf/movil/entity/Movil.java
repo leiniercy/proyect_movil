@@ -45,8 +45,11 @@ public class Movil extends AbstractEntity{
     @NotBlank(message = "Este campo es obligatorio") //permmite validar que no sea nulo y q tenga al menos un caracter
     @Size(min = 2, max=255, message = "No cumple con las reglas del tamaño") //validacion de tamaño, minimo 2 caracteres , maximo 255 caracteres
     private String nombre;
-    //principales caracteristicas
-    @NotBlank(message = "Este campo es obligatorio") //permmite validar que no sea nulo y q tenga al menos un caracter
+   //principales caracteristicas
+    // @NotBlank(message = "Este campo es obligatorio") //permmite validar que no sea nulo y q tenga al menos un caracter
+    // @Size(min = 2, max=255, message = "No cumple con las reglas del tamaño") //validacion de tamaño, minimo 2 caracteres , maximo 255 caracteres
+    // private String sistemaOperativo;
+   @NotBlank(message = "Este campo es obligatorio") //permmite validar que no sea nulo y q tenga al menos un caracter
     private String pantalla;
     @NotBlank(message = "Este campo es obligatorio") //permmite validar que no sea nulo y q tenga al menos un caracter
     private String procesador;

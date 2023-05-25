@@ -1,0 +1,227 @@
+<html
+  xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+>
+  <!-- 
+    th:each="movil: ${movilList}"
+    funciona como un ciclo que a partir de la informacion recibida del backend
+    recorre una lista de objetos  
+-->
+  <div class="container" th:each="movil: ${movilList}">
+    <div class="row">
+      <!-- Fila Principal -->
+
+      <div class="col">
+        <!--Imagen y nombre del telefono-->
+
+        <div class="container">
+          <div class="row">
+            <div class="col">
+              <!--movil.getNombre()-->
+
+              <h1
+                style="color: #000000; font-weight: bolder; text-align: center"
+                th:text="${movil.nombre}"
+              >
+                <strong>nombre</strong>
+              </h1>
+              <!--movil.getNombre()-->
+            </div>
+          </div>
+
+          <div class="row" style="display: flex; justify-content: center">
+            <div class="col">
+              <div
+                class="gallery"
+                style="display: flex; justify-content: center"
+              >
+                <div class="images">
+                  <img
+                    src="/img/samsung_logo_1.jpg"
+                    class="content"
+                    style="height: 540px; width: 380px"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Fin - Imagen y nombre del telefono-->
+
+      <div class="col">
+        <!--Caracteristicas del telefono-->
+        <div class="container">
+          <div class="row">
+            <span  style="visibility: hidden;" th:text="${movil.id}">id</span>
+          </div>
+          <div class="row">
+            <div class="col">
+              <span style="color: #006; font-size: 1.2rem">Precio:</span>
+              <!--movil.getPrecio()-->
+              <span
+                style="color: #006; font-weight: bolder; font-size: 25px"
+                th:text="${movil.precio}"
+                ><strong>precio</strong></span
+              >
+              <span style="color: #006; font-weight: bolder; font-size: 25px"
+                ><strong>MLC</strong></span
+              >
+            </div>
+          </div>
+
+          <!-- Principales características -->
+          <div class="row">
+            <div class="col">
+              <span style="color: #003399"
+                ><strong>Principales Características:</strong></span
+              ><br />
+
+              <span style="color: #3399cc">Sistema Operativo:</span>
+              <!-- <span th:text="${movil.sistemaOperativo}">Sistema Operativo</span> --><br />
+
+              <span style="color: #3399cc">Pantalla: </span>
+              <!--movil.getPantalla()-->
+              <span th:text="${movil.pantalla}">pantalla</span><br />
+
+              <span style="color: #3399cc">Procesador:</span>
+              <!--movil.getProcesador()-->
+              <span th:text="${movil.procesador}">procesador</span><br />
+
+              <span style="color: #3399cc">Modelo:</span>
+              <!--movil.getModelo()-->
+              <span th:text="${movil.modelo}">modelo</span><br />
+            </div>
+          </div>
+
+          <!-- Almacenamiento -->
+          <div class="row">
+            <div class="col">
+              <span style="color: #003399"
+                ><strong>Almacenamiento:</strong></span
+              ><br />
+
+              <span style="color: #3399cc">RAM:</span>
+              <!--movil.getRam()-->
+              <span th:text="${movil.ram}">ram</span><br />
+
+              <span style="color: #3399cc">ROM:</span>
+              <!--movil.getRom()-->
+              <span th:text="${movil.rom}">rom</span><br />
+            </div>
+          </div>
+
+          <!-- Conectividad -->
+          <div class="row">
+            <div class="col">
+              <span style="color: #003399"><strong>Conectividad:</strong></span
+              ><br />
+
+              <span style="color: #3399cc">Bandas 2G GSM:</span>
+              <!--movil.getbanda2G()-->
+              <span th:text="${movil.banda2G}">2G</span><br />
+
+              <span style="color: #3399cc">Bandas 3G LATAM UMTS:</span>
+              <!--movil.getbanda3G()-->
+              <span th:text="${movil.banda3G}">3G</span><br />
+
+              <span style="color: #3399cc">Bandas 4G LTE LATAM:</span>
+              <!--movil.getbanda4G()-->
+              <span th:text="${movil.banda4G}">4G</span><br />
+            </div>
+          </div>
+
+          <!-- Cámaras -->
+          <div class="row">
+            <div class="col">
+              <span style="color: #003399"><strong>Cámaras:</strong></span
+              ><br />
+
+              <span style="color: #3399cc">Principal:</span>
+              <!--movil.getcamaraFrontal()-->
+              <span th:text="${movil.camaraFrontal}">camaraFrontal</span><br />
+
+              <span style="color: #3399cc">Secundaria: </span>
+              <!--movil.getcamaraTrasera()-->
+              <span th:text="${movil.camaraTrasera}">camaraTrasera</span><br />
+            </div>
+          </div>
+
+          <!-- Batería -->
+          <div class="row">
+            <div class="col">
+              <span style="color: #003399"><strong>Batería:</strong></span
+              ><br />
+
+              <span style="color: #3399cc">Capacidad:</span>
+              <!--movil.getBateria()-->
+              <span th:text="${movil.bateria}">bateria</span><br />
+            </div>
+          </div>
+
+          <!-- Otros-->
+          <div class="row">
+            <div class="col">
+              <span style="color: #003399"><strong>Otros:</strong></span
+              ><br />
+
+              <span style="color: #3399cc">WIFI:</span>
+              <!--movil.getWifi()-->
+              <span th:text="${movil.wifi}">wifi</span><br />
+
+              <span style="color: #3399cc">Sensores:</span>
+              <!--movil.getSensores()-->
+              <span th:text="${movil.sensores}">sensores</span><br />
+              <span style="color: #3399cc">SIM:</span>
+              <!--movil.getSim()-->
+              <span th:text="${movil.sim}">sim</span><br />
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Fin - Caracteristicas del telefono-->
+
+      <div class="col">
+        <!-- Botones de moificar y eliminar -->
+        <div class="container">
+          <div class="row">
+            <a href="#" th:href="@{'/movil/edit/'+ ${movil.id}}"
+              ><i class="fas fa-edit"></i
+            ></a>
+          </div>
+          <div class="row">
+            <a
+              href="#"
+              th:onclick="'javascript:confirmDelete(\''+ ${movil.id} +'\');'"
+              ><i class="fas fa-user-times"></i
+            ></a>
+          </div>
+        </div>
+      </div>
+      <!-- Fin - Botones de moificar y eliminar -->
+    </div>
+    <!--  Fin - Fila Principal -->
+  </div>
+
+  <!--Este div solo se va a mostrar si existe algun error-->
+  <div
+    class="alert alert-danger text-center"
+    th:if="${deleteError}"
+    th:text="${deleteError}"
+  >
+    Error Message
+  </div>
+</html>
+
+<script type="text/javascript">
+  function confirmDelete(id) {
+    $("#deleteModal").modal("show");
+    $("#movilIdHiddenInput").val(id);
+  }
+
+  function deleteMovil() {
+    var id = $("#movilIdHiddenInput").val();
+    window.location = "/movil/delete/" + id;
+  }
+</script>

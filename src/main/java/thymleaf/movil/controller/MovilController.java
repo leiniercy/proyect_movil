@@ -123,7 +123,7 @@ public class MovilController {
 	}
 	
 	@GetMapping("/movil/cancel")
-	public String cancelEditUser(ModelMap model) {
+	public String cancelEditUser(Model model) {
 		return REDIRECT;
 	}
 
